@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 
 const Hero: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   return (
     <section className="pt-28 pb-20 px-4 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 z-0"></div>
-      
-      {/* Neural Network Background */}
+      {/* Video jako tło */}
+      <video
+        ref={videoRef}
+        src="/header.mp4"
+        autoPlay
+        muted
+        playsInline
+        loop={false}
+        onEnded={() => videoRef.current?.pause()}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+
+      {/* delikatny overlay, żeby tekst był czytelny */}
+      <div className="absolute inset-0 bg-gray-900/60 z-0"></div>
+
+      {/* Neural Network Background (opcjonalnie możesz to usunąć jeśli video wystarczy) */}
       <div className="absolute inset-0 z-0">
         {Array.from({ length: 10 }).map((_, i) => (
           <motion.div
@@ -35,20 +50,20 @@ const Hero: React.FC = () => {
       <div className="container mx-auto relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             Stań się częścią{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
               rewolucji AI
             </span>{' '}
             w Polsce
           </motion.h1>
-          
+
           <motion.p
-            className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
+            className="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -56,7 +71,7 @@ const Hero: React.FC = () => {
             Odkryj najnowsze trendy, narzędzia i zastosowania sztucznej inteligencji. 
             Dołącz do społeczności budującej inteligentną przyszłość Polski.
           </motion.p>
-          
+
           <motion.div
             className="flex flex-col sm:flex-row justify-center gap-4"
             initial={{ opacity: 0, y: 20 }}
@@ -64,7 +79,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <a 
-              href="#narzędzia-ai" 
+              href="#narzedzia-ai" 
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-indigo-100/50 flex items-center justify-center"
             >
               Odkryj narzędzia AI
